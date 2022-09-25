@@ -6,7 +6,6 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  
   static const String _dbName = "myDatabase.db";
   static const int _dbVersion = 1;
   static const String _tableName = "myTable";
@@ -19,7 +18,7 @@ class DatabaseHelper {
 
   static Database? _database;
 
-  Future <Database?> get database async {
+  Future<Database?> get database async {
     if (_database == null) return _database;
     _database = await _initializeDatabase();
     return _database;
@@ -32,11 +31,8 @@ class DatabaseHelper {
   }
 
   Future _onCreate(Database db, int version) async {
-    db.query(
-      '''
+    db.query('''
       CREATE TABLE $_tableName($_columnId INTEGER PRIMARY KEY AUTOINCREMENT, $_columnUser TEXT NOT NULL)
-      '''
-    );
+      ''');
   }
-
 }
