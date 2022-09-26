@@ -18,7 +18,6 @@ class DatabaseHelper {
   static Database? _database;
 
   Future<Database?> get database async {
-    if (_database == null) return _database;
     _database = await _initializeDatabase();
     return _database;
   }
@@ -43,17 +42,19 @@ class DatabaseHelper {
   Future<List<Map<String, dynamic>>> queryAll() async {
     Database? db = await instance.database;
     return db!.query(_tableName);
-  } 
+  }
 
   // It returns the number of rows in the database updated.
   Future<int> update(Map<String, dynamic> row) async {
     Database? db = await instance.database;
     int id = row[_columnId];
-    return await db!.update(_tableName, row, where: '$_columnId = ?', whereArgs: [id]);
+    return await db!
+        .update(_tableName, row, where: '$_columnId = ?', whereArgs: [id]);
   }
 
   Future<int> delete(int id) async {
     Database? db = await instance.database;
-    return await db!.delete(_tableName, where: '$_columnId = ?', whereArgs: [id]);
+    return await db!
+        .delete(_tableName, where: '$_columnId = ?', whereArgs: [id]);
   }
-} 
+}
