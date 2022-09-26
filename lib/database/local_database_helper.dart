@@ -30,7 +30,7 @@ class DatabaseHelper {
   }
 
   Future _onCreate(Database db, int version) async {
-    db.query('''
+    db.execute('''
       CREATE TABLE $_tableName($_columnId INTEGER PRIMARY KEY AUTOINCREMENT, $_columnUser TEXT NOT NULL)
       ''');
   }
