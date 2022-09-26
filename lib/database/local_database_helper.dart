@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -34,5 +33,23 @@ class DatabaseHelper {
     db.query('''
       CREATE TABLE $_tableName($_columnId INTEGER PRIMARY KEY AUTOINCREMENT, $_columnUser TEXT NOT NULL)
       ''');
+  }
+
+  Future<int> insert(Map<String, dynamic> row) async {
+    Database? db = await instance.database;
+    return await db!.insert(_tableName, row);
+  }
+
+  Future<List<Map<String, dynamic>>> queryAll() async {
+    Database? db = await instance.database;
+    return db!.query(_tableName);
+  } 
+
+  // It returns the number of rows in the database updated.
+  Future<int> update(Map<String, dynamic> row) async {
+    Database? db = await instance.database;
+    int id = row[_columnId];
+    return db!.update(_tableName, row, where: '$_columnId = ? $_columnUser = ?', whereArgs: [1, 'Ahmad']);
+
   }
 }
