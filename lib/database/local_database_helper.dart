@@ -39,6 +39,7 @@ class DatabaseHelper {
     return await db!.insert(_tableName, row);
   }
 
+  // Gets all the rows.
   Future<List<Map<String, dynamic>>> queryAll() async {
     Database? db = await instance.database;
     return db!.query(_tableName);
@@ -52,6 +53,7 @@ class DatabaseHelper {
         .update(_tableName, row, where: '$_columnId = ?', whereArgs: [id]);
   }
 
+  // Returns the number of rows affected.
   Future<int> delete(int id) async {
     Database? db = await instance.database;
     return await db!
